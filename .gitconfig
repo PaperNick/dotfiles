@@ -1,0 +1,27 @@
+[user]
+    name = PaperNick
+    email = papernick@users.noreply.github.com
+[core]
+    editor = mousepad
+[push]
+    default = simple
+[credential]
+    helper = cache --timeout=3600
+[diff]
+    tool = meld
+[merge]
+    tool = meld
+[alias]
+    da = difftool -d
+    whitespace = diff --check
+    today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+    # ccm = copy commit message
+    ccm = !sh -c 'git log -1 --format=%B | xclip -selection clipboard'
+    # cch = copy commit hash
+    cch = !sh -c 'echo -n $(git log -1 --format=%H) | xclip -selection clipboard'
+    # ocad = original commit author date
+    ocad = !sh -c 'LC_ALL=C GIT_COMMITTER_DATE="$(git log -1 --format='%ad')" GIT_COMMITTER_NAME="$(git log -1 --format='%an')" GIT_COMMITTER_EMAIL="$(git log -1 --format='%ae')" git commit --amend --no-edit'
+[status]
+    short = true
+[color]
+    ui = auto
