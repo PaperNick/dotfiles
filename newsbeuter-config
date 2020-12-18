@@ -1,0 +1,9 @@
+auto-reload yes
+browser exo-open --launch WebBrowser
+max-items 50
+reload-threads 2
+reload-time 60
+
+# Unbind "o" - "open-in-browser" and remap to "open-in-browser-and-mark-as-read"
+unbind-key o
+bind-key o open-in-browser-and-mark-read
