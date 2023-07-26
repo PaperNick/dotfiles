@@ -105,6 +105,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -123,6 +127,10 @@ function parse_git_branch () {
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
+LIGHT_BLUE="\[\033[0;34m\]"
+DARK_GREEN="\[\033[0;36m\]"
 NO_COLOR="\[\033[0m\]"
 
 PS1="$GREEN\u@\h$NO_COLOR:\w$YELLOW\$(__git_ps1)$NO_COLOR\$ "
+# Default PS1 + $(__git_ps1)
+# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[0;33m\]$(__git_ps1)\[\033[0m\]\$ '
