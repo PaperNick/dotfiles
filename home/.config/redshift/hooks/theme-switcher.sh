@@ -19,17 +19,19 @@
 # echo "Redshift params: \n $@" >> ~/Desktop/redshift-debug-params.txt
 
 if [ "$1" = "period-changed" ]; then
-  case "$3" in
-    night)
-      xfconf-query -c xsettings -p /Net/ThemeName -s Greybird-dark
-      xfconf-query -c xfwm4 -p /general/theme -s Greybird-dark
-      ;;
-    # transition)
-    #   # Do someting during transition...
-    #   ;;
-    daytime)
-      xfconf-query -c xsettings -p /Net/ThemeName -s Greybird
-      xfconf-query -c xfwm4 -p /general/theme -s Greybird
-      ;;
-  esac
+    case "$3" in
+        night)
+            xfconf-query -c xsettings -p /Net/ThemeName -s Greybird-dark
+            xfconf-query -c xfwm4 -p /general/theme -s Greybird-dark
+            xfconf-query -c xfce4-panel -p /panels/dark-mode -s true
+            ;;
+        # transition)
+        #     Do someting during transition...
+        #     ;;
+        daytime)
+            xfconf-query -c xsettings -p /Net/ThemeName -s Greybird
+            xfconf-query -c xfwm4 -p /general/theme -s Greybird
+            xfconf-query -c xfce4-panel -p /panels/dark-mode -s false
+            ;;
+    esac
 fi
