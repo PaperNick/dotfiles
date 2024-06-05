@@ -18,20 +18,32 @@
 # Debug input params of this script:
 # echo "Redshift params: \n $@" >> ~/Desktop/redshift-debug-params.txt
 
+set_light_theme() {
+    xfconf-query -c xsettings -p /Net/ThemeName -s Greybird
+    xfconf-query -c xfwm4 -p /general/theme -s Greybird
+    xfconf-query -c xfce4-panel -p /panels/dark-mode -s false
+}
+
+set_night_theme() {
+    xfconf-query -c xsettings -p /Net/ThemeName -s Greybird-dark
+    xfconf-query -c xfwm4 -p /general/theme -s Greybird-dark
+    xfconf-query -c xfce4-panel -p /panels/dark-mode -s true
+}
+
 if [ "$1" = "period-changed" ]; then
     case "$3" in
         night)
-            xfconf-query -c xsettings -p /Net/ThemeName -s Greybird-dark
-            xfconf-query -c xfwm4 -p /general/theme -s Greybird-dark
-            xfconf-query -c xfce4-panel -p /panels/dark-mode -s true
+            set_night_theme
             ;;
-        # transition)
-        #     Do someting during transition...
-        #     ;;
+        transition)
+            current_month="$(date '+%-m')"
+            if [ "$current_month" -ge 4 ] && [ "$current_month" -le 10 ]; then
+                # Activate the night theme earlier during Summer time
+                set_night_theme
+            fi
+            ;;
         daytime)
-            xfconf-query -c xsettings -p /Net/ThemeName -s Greybird
-            xfconf-query -c xfwm4 -p /general/theme -s Greybird
-            xfconf-query -c xfce4-panel -p /panels/dark-mode -s false
+            set_light_theme
             ;;
     esac
 fi
