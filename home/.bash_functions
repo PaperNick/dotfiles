@@ -6,3 +6,7 @@ mullvad_random_location() {
     local city="$(echo "$rand_location" | cut -d '-' -f2)"
     mullvad relay set location "$country" "$city" "$rand_location"
 }
+
+add_mp3_cover() {
+    ffmpeg -i "$1" -i "$2" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "${1%.*} (cover).mp3"
+}
