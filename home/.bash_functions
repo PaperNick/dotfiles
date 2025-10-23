@@ -1,6 +1,11 @@
 #!/bin/bash
 
 mullvad_random_location() {
+  if [ "$(command -v mullvad)" = "" ]; then
+    echo "Error: mullvad is not installed. Aborting."
+    return 1
+  fi
+
   # Filter out US, Canada, Hong Kong VPNs
   local vpn_list="$(mullvad relay list | grep -E '*\.*\.*\.*\) \-' | grep -v 'us-' | grep -v 'ca-' | grep -v 'hk-hkg-' | awk '{print $1}')"
   local rand_location="$(echo "$vpn_list" | shuf -n 1)"
@@ -10,7 +15,21 @@ mullvad_random_location() {
 }
 
 add_mp3_cover() {
-  ffmpeg -i "$1" -i "$2" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "${1%.*} (cover).mp3"
+  if [ "$(command -v ffmpeg)" = "" ]; then
+    echo "Error: ffmpeg is not installed. Aborting."
+    return 1
+  fi
+
+  local song="$1"
+  local image="$2"
+
+  if [ ! -f "$song" ] || [ ! -f "$image" ]; then
+    echo "Error: please specify an mp3 song and a cover image"
+    echo "Usage: add_mp3_cover song.mp3 image.jpg"
+    return 1
+  fi
+
+  ffmpeg -i "$song" -i "$image" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "${song%.*} (cover).mp3"
 }
 
 qrdisplay() {
