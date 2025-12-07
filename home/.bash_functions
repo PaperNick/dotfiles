@@ -61,3 +61,34 @@ qrdisplay() {
   # Cleanup after the viewer is closed
   rm "$qr_image_path"
 }
+
+sanitize_text() {
+  local text="$1"
+
+  if [ "$text" = "" ]; then
+    return 1
+  fi
+
+  # Replace special characters with their Unicode equivalents
+  text="${text//\//⧸}"
+  text="${text//\*/＊}"
+  text="${text//\?/？}"
+  text="${text//&/＆}"
+  text="${text//:/：}"
+  text="${text//;/；}"
+  text="${text//|/｜}"
+  text="${text//>/＞}"
+  text="${text//</＜}"
+  text="${text//\"/＂}"
+  text="${text//\'/’}"
+  text="${text//\\/＼}"
+  text="${text//\$/＄}"
+  text="${text//!/！}"
+  text="${text//\#/＃}"
+
+  if [ "$(command -v xclip)" != "" ]; then
+    echo -n "$text" | xclip -selection clipboard
+  fi
+
+  echo "$text"
+}
