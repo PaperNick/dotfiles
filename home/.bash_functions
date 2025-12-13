@@ -92,3 +92,18 @@ sanitize_text() {
 
   echo "$text"
 }
+
+docx_search() {
+  # Inspired by: https://unix.stackexchange.com/a/630451
+  local keywords="$@"
+  local search_dir="$(pwd)"
+
+  local doc_files=()
+  while IFS= read -r file; do
+    doc_files+=("$file")
+  done < <(find "$search_dir" -iname "*.docx")
+
+  for doc_file in "${doc_files[@]}"; do
+    unzip -p "$doc_file" | grep -qiF "$keywords" && echo "$doc_file"
+  done
+}
