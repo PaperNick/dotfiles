@@ -107,3 +107,20 @@ docx_search() {
     unzip -p "$doc_file" | grep -qiF "$keywords" && echo "$doc_file"
   done
 }
+
+lrc_type() {
+  local first
+
+  for f in "$@"; do
+    if [ ! -f "$f" ]; then
+      continue
+    fi
+
+    first=$(head -1 "$f")
+    if [[ "$first" == \[*\]* ]]; then
+      echo "SYNCED: $f"
+    else
+      echo "PLAIN: $f"
+    fi
+  done
+}
