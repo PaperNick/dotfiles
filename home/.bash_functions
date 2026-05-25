@@ -23,6 +23,16 @@ add_mp3_cover() {
   local song="$1"
   local image="$2"
 
+  covers=(Cover.jpg cover.jpg)
+  if [[ ! -f "$image" ]]; then
+    for cover in "${covers[@]}"; do
+      if [ -f "$cover" ]; then
+        image="$cover"
+        break
+      fi
+    done
+  fi
+
   if [ ! -f "$song" ] || [ ! -f "$image" ]; then
     echo "Error: please specify an mp3 song and a cover image"
     echo "Usage: add_mp3_cover song.mp3 image.jpg"
