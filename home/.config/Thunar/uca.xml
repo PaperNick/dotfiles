@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>Terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1548708468435346-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>catfish</icon>
+	<name>Find in this folder</name>
+	<submenu></submenu>
+	<unique-id>1548708468435431-3</unique-id>
+	<command>catfish --path=%f</command>
+	<description>Search for files within this folder</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>document-print</icon>
+	<name>Print file/s</name>
+	<submenu></submenu>
+	<unique-id>1548708468435438-4</unique-id>
+	<command>thunar-print %F</command>
+	<description>Send one or multiple files to the default printer</description>
+	<range></range>
+	<patterns>*.asc,*.brf,*.css,*.doc,*.docm,*.docx,*.dotm,*.dotx,*.fodg,*.fodp,*.fods,*.fodt,*.gif,*.htm,*.html,*.jpe,*.jpeg,*.jpg,*.odb,*.odf,*.odg,*.odm,*.odp,*.ods,*.odt,*.otg,*.oth,*.otp,*.ots,*.ott,*.pbm,*.pdf,*.pgm,*.png,*.pnm,*.pot,*.potm,*.potx,*.ppm,*.ppt,*.pptm,*.pptx,*.rtf,*.shtml,*.srt,*.text,*.tif,*.tiff,*.txt,*.xbm,*.xls,*.xlsb,*.xlsm,*.xlsx,*.xltm,*.xltx,*.xpm,*.xwd</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>ccsm</icon>
+	<name>Open a root Thunar here</name>
+	<submenu></submenu>
+	<unique-id>1471690600076407-1</unique-id>
+	<command>pkexec thunar %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>accessories-text-editor</icon>
+	<name>Edit as root</name>
+	<submenu></submenu>
+	<unique-id>1471690735053705-2</unique-id>
+	<command>pkexec mousepad %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<text-files/>
+</action>
+<action>
+	<icon>document-export</icon>
+	<name>Copy Path</name>
+	<submenu></submenu>
+	<unique-id>1471701973274607-16</unique-id>
+	<command>echo -n %f | xclip -selection clipboard</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>org.gnome.baobab</icon>
+	<name>View Disk Usage</name>
+	<submenu></submenu>
+	<unique-id>1471700630531136-9</unique-id>
+	<command>baobab %d</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>postscript-viewer</icon>
+	<name>Export to PDF</name>
+	<submenu></submenu>
+	<unique-id>1471701071387098-10</unique-id>
+	<command>unoconv -f pdf %F</command>
+	<description></description>
+	<range></range>
+	<patterns>*.doc;*.docx;*.odt;*.odp;*.pps;*.ppt;*.xls;*.xlsx;*.ods;*.pptx</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>edit-copy</icon>
+	<name>Compare</name>
+	<submenu></submenu>
+	<unique-id>1471701673442595-13</unique-id>
+	<command>meld %F</command>
+	<description>Compare files or directories</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>python3.12</icon>
+	<name>Open Python HTTP Server here</name>
+	<submenu></submenu>
+	<unique-id>1606999007808455-1</unique-id>
+	<command>xfce4-terminal --working-directory %f --command &apos;python3 -m http.server&apos;</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>media-import-audio-cd</icon>
+	<name>Mount ISO Image</name>
+	<submenu></submenu>
+	<unique-id>1498983501773567-18</unique-id>
+	<command>mkdir %f.mount &amp;&amp; fuseiso %f %f.mount</command>
+	<description></description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>media-eject</icon>
+	<name>Unmount ISO Image</name>
+	<submenu></submenu>
+	<unique-id>1498983532605360-19</unique-id>
+	<command>fusermount -u %f.mount &amp;&amp; rmdir %f.mount</command>
+	<description></description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>mpv</icon>
+	<name>Play in mpv Playlist</name>
+	<submenu></submenu>
+	<unique-id>1665395296969521-1</unique-id>
+	<command>mpv %F</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>applications-multimedia</icon>
+	<name>Total Duration of Media</name>
+	<submenu></submenu>
+	<unique-id>1759255574082022-1</unique-id>
+	<command>~/Workspace/linux-scripts/calculate_media_duration.sh %F</command>
+	<description>Calculate the total duration of the selected media files and displays a notification</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>text-x-ssa</icon>
+	<name>LRC Download</name>
+	<submenu></submenu>
+	<unique-id>1780732640556396-1</unique-id>
+	<command>bash -c &quot;notify-send -i browser-download-symbolic &apos;Downloading LRC&apos; &apos;Processing &apos;$(printf &apos;%%s\n&apos; %F | wc -l)&apos; files...&apos; &amp;&amp; lrcdown %F | xargs -0 -I {} notify-send -i check-active-symbolic &apos;Download complete&apos; &apos;{}&apos;&quot;</command>
+	<description>Download synchronized or plaintext lyrics</description>
+	<range>*</range>
+	<patterns>*.mp3</patterns>
+	<audio-files/>
+</action>
+<action>
+	<icon>archive-insert</icon>
+	<name>LRC Embed</name>
+	<submenu></submenu>
+	<unique-id>1780753721424978-2</unique-id>
+	<command>for song in %F; do bash -c &quot;lrctools embed \&quot;$song\&quot; --in-place | xargs -0 -I {} notify-send -i check-active-symbolic &apos;LRC Embedded&apos; &apos;{}&apos;&quot;; done</command>
+	<description>Embed synchronized or plaintext lyrics into MP3</description>
+	<range>*</range>
+	<patterns>*.mp3</patterns>
+	<audio-files/>
+</action>
+<action>
+	<icon>edit-find</icon>
+	<name>LRC Inspect</name>
+	<submenu></submenu>
+	<unique-id>1780760448178008-3</unique-id>
+	<command>for song in %F; do bash -c &quot;lrctools inspect \&quot;$song\&quot; | xargs -0 -I {} notify-send -i edit-find &apos;MP3 Analysis&apos; &apos;{}&apos;&quot;; done</command>
+	<description>Inspect the selected MP3 for presence of embedded lyrics</description>
+	<range>*</range>
+	<patterns>*.mp3</patterns>
+	<audio-files/>
+</action>
+</actions>
