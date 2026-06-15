@@ -169,6 +169,17 @@
 	<video-files/>
 </action>
 <action>
+	<icon>media-import-audio-cd</icon>
+	<name>Add MP3 Cover</name>
+	<submenu></submenu>
+	<unique-id>1781528633194529-1</unique-id>
+	<command>for song in %F; do bash -c &quot;source ~/.bash_functions &amp;&amp; add_mp3_cover \&quot;$song\&quot;&quot;; done</command>
+	<description>Embed the Cover Art in the selected MP3 File</description>
+	<range>*</range>
+	<patterns>*.mp3</patterns>
+	<audio-files/>
+</action>
+<action>
 	<icon>text-x-ssa</icon>
 	<name>LRC Download</name>
 	<submenu></submenu>
