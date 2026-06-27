@@ -36,14 +36,15 @@ function isLrcToolsInstalled() {
     }
     return subprocessResult.status === 0;
 }
-function readTimedLyrics(filePath) {
+function readLyrics(filePath, type) {
     var _a, _b;
+    if (type === void 0) { type = "timed"; }
     var lrcTools = options.lrc_tools_binary;
     var subprocessResult = mp.command_native({
         name: "subprocess",
         capture_stdout: true,
         capture_stderr: true,
-        args: [lrcTools, "read", "--include-lang", filePath, "timed"],
+        args: [lrcTools, "read", "--include-lang", filePath, type],
     });
     if (subprocessResult.killed_by_us) {
         return null;
@@ -54,8 +55,10 @@ function readTimedLyrics(filePath) {
     }
     if (subprocessResult.status !== 0) {
         var errorOutput = ((_b = subprocessResult.stderr) !== null && _b !== void 0 ? _b : "").trim();
-        var noTimedLyrics = /No timed lyrics/i.test(errorOutput);
-        if (!noTimedLyrics) {
+        var noLyricsPattern = new RegExp("No ".concat(type, " lyrics"), "i");
+        var noLyricsMatch = noLyricsPattern.test(errorOutput);
+        var hasNonStandardError = !noLyricsMatch;
+        if (hasNonStandardError) {
             logError("'".concat(getBasename(lrcTools), "' error: ").concat(errorOutput));
         }
         return null;
@@ -63,7 +66,7 @@ function readTimedLyrics(filePath) {
     var rawLyrics = subprocessResult.stdout;
     return rawLyrics !== null && rawLyrics !== void 0 ? rawLyrics : null;
 }
-function parseLanguageAndLyrics(rawOutput) {
+function parseTimedLyricsAndLang(rawOutput) {
     var _a, _b;
     var language = null;
     var lrcLines = [];
@@ -97,6 +100,7 @@ function loadLyricsInMpv(lyrics, language) {
 function main() {
     mp.options.read_options(options, "mpv-lrc-loader");
     mp.register_event("file-loaded", function () {
+        var _a;
         var filePath = mp.get_property("path");
         if (!filePath) {
             return;
@@ -111,11 +115,11 @@ function main() {
             logError("'".concat(getBasename(options.lrc_tools_binary), "' is not installed. Please install it from https://github.com/PaperNick/lrc_tools"));
             return;
         }
-        var rawOutput = readTimedLyrics(filePath);
+        var rawOutput = (_a = readLyrics(filePath, "timed")) !== null && _a !== void 0 ? _a : readLyrics(filePath, "plain");
         if (!rawOutput) {
             return;
         }
-        var _a = parseLanguageAndLyrics(rawOutput), language = _a.language, lyrics = _a.lyrics;
+        var _b = parseTimedLyricsAndLang(rawOutput), language = _b.language, lyrics = _b.lyrics;
         if (!lyrics) {
             return;
         }
